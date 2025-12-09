@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gen Z Slang Dictionary</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Gen Z Slang Dictionary</h1>
+    <p class="subtitle">Because not everyone speaks internet 😌</p>
+
+    <!-- Word of the day -->
+    <div class="wotd">
+        <p class="wotd-label">Word of the day</p>
+        <h3>{{ word_of_the_day }}</h3>
+        <p>{{ wotd_entry.short }}</p>
+
+        <form method="POST">
+            <input type="hidden" name="word" value="{{ word_of_the_day }}">
+            <button type="submit" class="btn">View meaning</button>
+        </form>
+    </div>
+
+    <!-- Search -->
+    <form method="POST" class="search-box" autocomplete="off">
+        <input
+            type="text"
+            id="searchInput"
+            name="word"
+            placeholder="Search a Gen Z word…"
+            required
+        >
+        <div id="suggestions" class="suggestions"></div>
+        <button type="submit" class="btn">Search</button>
+    </form>
+
+    <!-- Result -->
+    {% if searched_word %}
+        <div class="result">
+            {% if entry %}
+                <h2>{{ searched_word }}</h2>
+                <span class="category">{{ entry.category }}</span>
+
+                <p><strong>{{ entry.short }}</strong></p>
+                <p>{{ entry.explanation }}</p>
+                <p class="example">“{{ entry.example }}”</p>
+            {% else %}
+                <p>Oops 😅 "{{ searched_word }}" isn’t in our dictionary yet.</p>
+            {% endif %}
+        </div>
+    {% endif %}
+
+</div>
+
+<!-- AUTOCOMPLETE + Animations SCRIPT -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    // ---------- Autocomplete ----------
+    const words = {{ all_words | tojson | safe }};
+    const input = document.getElementById("searchInput");
+    const suggestionsBox = document.getElementById("suggestions");
+
+    input.addEventListener("input", () => {
+        const value = input.value.toLowerCase().trim();
+        suggestionsBox.innerHTML = "";
+
+        if (!value) return;
+
+        const filtered = words.filter(word => word.toLowerCase().startsWith(value));
+
+        filtered.slice(0, 6).forEach(word => {
+            const div = document.createElement("div");
+            div.className = "suggestion-item";
+            div.textContent = word;
+
+            div.addEventListener("click", () => {
+                input.value = word;
+                suggestionsBox.innerHTML = "";
+            });
+
+            suggestionsBox.appendChild(div);
+        });
+    });
+
+    document.addEventListener("click", (e) => {
+        if (e.target !== input) {
+            suggestionsBox.innerHTML = "";
+        }
+    });
+
+    // ---------- Word of the Day Animation ----------
+    const wotdCard = document.querySelector(".wotd");
+    if (wotdCard) {
+        wotdCard.style.opacity = 0;
+        wotdCard.style.transform = "translateY(20px)";
+        setTimeout(() => {
+            wotdCard.style.transition = "all 0.6s ease";
+            wotdCard.style.opacity = 1;
+            wotdCard.style.transform = "translateY(0)";
+        }, 100);
+    }
+
+    // ---------- Search Result Animation ----------
+    const resultCard = document.querySelector(".result");
+    if (resultCard) {
+        resultCard.style.opacity = 0;
+        resultCard.style.transform = "translateY(20px)";
+        setTimeout(() => {
+            resultCard.style.transition = "all 0.5s ease";
+            resultCard.style.opacity = 1;
+            resultCard.style.transform = "translateY(0)";
+        }, 100);
+    }
+});
+</script>
+
+</body>
+</html>
