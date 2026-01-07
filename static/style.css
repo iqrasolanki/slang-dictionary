@@ -1,137 +1,453 @@
-/* ----------------- Base ----------------- */
 * {
-    box-sizing: border-box;
-    font-family: 'Inter', sans-serif;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
 }
-
 body {
-    margin: 0;
-    padding: 0;
-    background: #fdf6f0; /* soft nude background */
-    color: #333; 
+  background: #fdf6f0;
+  color: #4b3f3f;
+  margin: 0;
 }
-
-/* ----------------- Container ----------------- */
+/* CONTAINER */
 .container {
-    max-width: 600px;
-    margin: 40px auto;
-    padding: 20px;
+  max-width: 960px;
+  margin: auto;
+  padding: 40px 20px;
 }
-
-/* ----------------- Headings ----------------- */
-h1 {
-    text-align: center;
-    color: #5a4d4d; /* darker nude shade */
+h1, h2, h3 {
+  text-align: center;
+  color: #6a4e42;
 }
-
 .subtitle {
-    text-align: center;
-    color: #8c7b78; /* soft neutral gray-brown */
+  text-align: center;
+  margin-bottom: 30px;
+  color: #8a6f63;
 }
-
-/* ----------------- Word of the Day ----------------- */
-.wotd {
-    background: #fff5f0; /* light nude card */
-    padding: 20px;
-    border-radius: 12px;
-    margin-bottom: 20px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.wotd:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.12);
-}
-
-.wotd-label {
-    font-weight: 600;
-    color: #a87c6e;
-}
-
-/* ----------------- Search Box ----------------- */
+/* SEARCH */
 .search-box {
-    position: relative;
-    margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 40px;
 }
-
 .search-box input {
-    width: 100%;
-    padding: 12px;
-    border-radius: 8px;
-    border: 1px solid #ccc2b2; /* neutral border */
-    background: #fffaf5; /* soft nude input */
-    color: #5a4d4d;
+  flex: 1;
+  padding: 18px;
+  font-size: 18px;
+  border-radius: 12px;
+  border: 1px solid #d8c7b2;
+  background: #fffaf5;
 }
-
 .search-box button {
-    margin-top: 10px;
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 8px;
-    background: #b79e8f; /* muted nude */
-    color: #fff;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.2s ease;
+  padding: 18px 30px;
+  border: none;
+  border-radius: 12px;
+  background: #b79e8f;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s ease;
 }
-
 .search-box button:hover {
-    background: #a87c6e; /* darker shade on hover */
-    transform: scale(1.05);
+  background: #a48778;
 }
-
-/* ----------------- Autocomplete ----------------- */
-.suggestions {
-    position: absolute;
-    width: 100%;
-    background: #fffaf5;
-    border-radius: 8px;
-    margin-top: 5px;
-    overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-    z-index: 100;
+/* GENERIC CARDS */
+.card {
+  background: #fff5f0;
+  padding: 25px;
+  border-radius: 16px;
+  margin-bottom: 30px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 }
-
-.suggestion-item {
-    padding: 12px 15px;
-    cursor: pointer;
-    transition: background 0.2s;
-    font-size: 15px;
-    color: #5a4d4d;
-}
-
-.suggestion-item:hover {
-    background: #f0e6e0;
-}
-
-/* ----------------- Search Result ----------------- */
-.result {
-    background: #fff5f0;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 0.5s forwards;
-}
-
-.category {
-    font-size: 0.9rem;
-    color: #a87c6e;
-    font-weight: 600;
-}
-
 .example {
-    font-style: italic;
-    color: #8c7b78;
+  font-style: italic;
+  color: #7b6a64;
 }
+/* WORD LIST */
+.word-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.word-list a,
+.word-pill {
+  background: #e8dfd6;
+  padding: 6px 12px;
+  border-radius: 20px;
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+.word-list a:hover,
+.word-pill:hover {
+  background: #d6c8b8;
+  transform: translateY(-1px);
+}
+/* LINKS */
+a {
+  color: #6a4e42;
+}
+.back {
+  display: inline-block;
+  margin-top: 20px;
+}
+/* HERO */
+.hero {
+  text-align: center;
+  margin-bottom: 50px;
+}
+.brand {
+  font-size: 42px;
+  font-weight: 600;
+}
+.brand .muted {
+  font-weight: 400;
+  color: #8a6f63;
+}
+.helper-text {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #8a6f63;
+}
+/* SPLIT LAYOUT – HOME */
+.split-layout.refined {
+  display: grid;
+  grid-template-columns: 1.1fr 1.4fr;
+  gap: 50px;
+  margin-top: 70px;
+  align-items: stretch;
+}
+/* PANELS */
+.left-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 30px;
+}
+.right-panel {
+  display: flex;
+  flex-direction: column;
+}
+/* FEATURE BOXES */
+/* WORD OF THE DAY */
+.wotd {
+  background: linear-gradient(135deg, #f3e8df, #fdf6f0);
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 16px 32px rgba(0,0,0,0.10);
+}
+.wotd-label {
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #8a6f63;
+}
+.wotd h3 {
+  font-size: 28px;
+  margin: 12px 0 8px;
+}
+/* CONTRIBUTE CTA */
+.cta-card {
+  background: linear-gradient(135deg, #ecdccd, #dbcec2);
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 18px 36px rgba(0,0,0,0.12);
+}
+/* EXPLORE SLANG */
+.right-panel .card {
+  background: linear-gradient(135deg, #f5ebe3, #fdf6f0);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 16px 32px rgba(0,0,0,0.10);
+  display: flex;
+  flex-direction: column;
+}
+.right-panel h3 {
+  text-align: left;
+  font-size: 22px;
+  margin-bottom: 18px;
+}
+/* FOOTER */
+.footer {
+  margin-top: 60px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #7b6a64;
+}
+/* MINIMAL EXPLORE LINK */
+.explore-link {
+  margin-top: auto;
+  padding-top: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #6a4e42;
+  text-decoration: none;
+  align-self: flex-start;
+}
+.explore-link:hover {
+  text-decoration: underline;
+}
+/* SUGGEST FORM PAGE */
+.form-card {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 32px;
+}
+.suggest-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.form-group label {
+  font-size: 0.9rem;
+  color: #6a4e42;
+  margin-bottom: 6px;
+  display: block;
+}
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid #d8c7b2;
+  background: #fffaf5;
+  font-size: 15px;
+}
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #b79e8f;
+}
+.cta-button.full {
+  width: 100%;
+  padding: 16px;
+  font-size: 16px;
+}
+.form-note {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #8a6f63;
+  margin-top: 10px;
+}
+.success-message {
+  background: #f3e8df;
+  padding: 14px;
+  border-radius: 12px;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #4b3f3f;
+}
+.back {
+  display: block;
+  text-align: center;
+  margin-top: 30px;
+}
+/* EXPLORE PAGE FIX */
+.explore-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 24px;
+  margin-top: 50px;
+}
+.explore-card {
+  background: #fffaf5;
+  border-radius: 18px;
+  padding: 22px 20px;
+  text-decoration: none;
+  border: 1px solid #e6d6c7;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.explore-card h3 {
+  margin: 0 0 10px;
+  font-size: 1.15rem;
+  color: #6a4e42;
+  text-align: left;
+}
+.explore-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #7b6a64;
+}
+.explore-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.08);
+}
+/* RANDOM SLANG BUTTON */
+.cta-button.secondary {
+  margin-top: 14px;
+  background: transparent;
+  border: 1px solid #6a4e42;
+  color: #6a4e42;
+}
+.cta-button.secondary:hover {
+  background: #6a4e42;
+  color: #fff;
+}
+/* RANDOM SLANG CARD */
+.random-card {
+  background: linear-gradient(135deg, #f7ede6, #fdf6f0);
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 14px 30px rgba(0,0,0,0.10);
+}
+.random-card h3 {
+  font-size: 22px;
+  margin: 12px 0 10px;
+  text-align: left;
+}
+.random-card p {
+  color: #7b6a64;
+  font-size: 15px;
+  margin-bottom: 18px;
+}
+/* NEW BADGE */
+.new-badge {
+  background: #b79e8f;
+  color: #fff;
+  font-size: 10px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+/* ADMIN PAGES */
+.admin-card {
+  margin-bottom: 30px;
+}
+.admin-word {
+  font-size: 22px;
+  margin-bottom: 10px;
+  text-align: left;
+}
+.muted-text {
+  color: #8a6f63;
+  font-size: 0.9rem;
+}
+.admin-actions {
+  display: flex;
+  gap: 14px;
+  margin-top: 20px;
+}
+.approve-btn,
+.reject-btn {
+  padding: 10px 18px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+.approve-btn {
+  background: #b79e8f;
+  color: white;
+}
+.approve-btn:hover {
+  background: #a48778;
+}
+.reject-btn {
+  background: #eee3db;
+  color: #6a4e42;
+}
+.reject-btn:hover {
+  background: #e0d2c7;
+}
+.empty-state {
+  text-align: center;
+  font-size: 1rem;
+  color: #6a4e42;
+}
+.admin-login-card {
+  max-width: 420px;
+  margin: 0 auto;
+  text-align: center;
+}
+.admin-login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 20px;
+}
+.admin-login-form input {
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid #d8c7b2;
+  background: #fffaf5;
+}
+.link-button {
+  background: none;
+  border: none;
+  color: #6b4eff;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0;
+}
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .split-layout.refined {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+/* MOBILE RESPONSIVENESS */
+@media (max-width: 768px) {
 
-/* ----------------- Animations ----------------- */
-@keyframes fadeInUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  /* Container spacing */
+  .container {
+    padding: 20px 15px;
+  }
+
+  /* Headings smaller */
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+  }
+
+  /* Search section */
+  .search-section {
+    padding: 20px 10px;
+  }
+
+  /* Search box stack */
+  .search-box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .search-box input {
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  .search-box button {
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  /* Helper text */
+  .helper-text {
+    font-size: 0.85rem;
+    text-align: center;
+  }
+
+  /* Cards */
+  .card {
+    padding: 16px;
+    margin-bottom: 15px;
+  }
+
+  /* Result card text */
+  .result-card p {
+    font-size: 0.95rem;
+  }
+
+  /* Buttons */
+  button {
+    padding: 10px;
+  }
 }
