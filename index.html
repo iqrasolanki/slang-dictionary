@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Slang Dictionary</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <header class="header">
+    <h1 class="brand-title">Slang Dictionary</h1>
+    <p class="subtitle">Understand the internet. One word at a time.</p>
+  </header>
+
+  <!-- SEARCH -->
+  <section class="search-section">
+    <form method="POST" class="search-box">
+      <input type="text" name="word" placeholder="Search a slang word…" required>
+      <button type="submit">Search</button>
+    </form>
+    <p class="helper-text">Try: sus, yeet, cap…</p>
+  </section>
+
+  <!-- SEARCH RESULT -->
+  {% if searched_word %}
+    {% if entry %}
+      <div class="card result-card">
+        <h2>{{ searched_word }}</h2>
+        <p><strong>Meaning:</strong> {{ entry.short }}</p>
+        <p>{{ entry.explanation }}</p>
+        <p class="example">“{{ entry.example }}”</p>
+      </div>
+    {% else %}
+      <p class="no-result">No exact match found.</p>
+      {% if suggestions %}
+        <p class="suggestion-title">Did you mean:</p>
+        <ul class="suggest-list">
+          {% for s in suggestions %}
+            <li><a href="/word/{{ s }}">{{ s }}</a></li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endif %}
+  {% endif %}
+  {% if searched_word and not entry and similar_words %}
+    <div class="card">
+      <p><strong>Closest match ⭐</strong></p>
+
+      <ul>
+        {% for word in similar_words %}
+          <li>
+            <form method="POST" style="display:inline;">
+              <input type="hidden" name="word" value="{{ word }}">
+              <button type="submit" class="link-button">
+                {% if loop.first %}⭐ {{ word }}{% else %}{{ word }}{% endif %}
+              </button>
+            </form>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
+  <!-- SPLIT LAYOUT -->
+  <section class="split-layout refined">
+
+    <!-- LEFT -->
+    <div class="left-panel">
+
+      <!-- WORD OF THE DAY -->
+      <div class="card wotd">
+        <span class="wotd-label">✨ Word of the Day</span>
+        <h3><a href="/word/{{ word_of_the_day }}">{{ word_of_the_day }}</a></h3>
+        <p>{{ wotd_entry.short }}</p>
+      </div>
+
+      <!-- RANDOM SLANG -->
+      <div class="card random-card">
+        <span class="wotd-label">🎲 Feeling curious?</span>
+        <h3>Discover a random slang</h3>
+        <p>Click below and explore something unexpected.</p>
+        <a href="/random" class="cta-button">Random slang →</a>
+      </div>
+
+      <!-- CONTRIBUTE -->
+      <div class="card cta-card">
+        <h3>Contribute to the culture</h3>
+        <p>Know a slang word we missed?</p>
+        <a class="cta-button" href="/suggest">Suggest a word →</a>
+      </div>
+
+    </div>
+
+    <!-- RIGHT -->
+    <div class="right-panel">
+      <div class="card">
+        <h3>Explore slang</h3>
+        <div class="word-list">
+          {% for word in all_words[:50] %}
+            <a class="word-pill" href="/word/{{ word }}">{{ word }}</a>
+          {% endfor %}
+        </div>
+
+        <a href="/explore" class="explore-link">
+          Explore all slang →
+        </a>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>Gen Z Slang Dictionary • Built with care</p>
+  </footer>
+
+</div>
+
+</body>
+</html>

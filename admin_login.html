@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+  <div class="card admin-login-card">
+
+    <h1>Admin Access</h1>
+    <p class="subtitle">Restricted area</p>
+
+    <form method="POST" class="admin-login-form">
+      <input
+        type="password"
+        name="password"
+        placeholder="Enter admin password"
+        required
+      >
+      <button type="submit" class="cta-button full">Login</button>
+    </form>
+
+    <a class="back" href="/">← Back to Dictionary</a>
+
+  </div>
+
+</div>
+
+</body>
+</html>

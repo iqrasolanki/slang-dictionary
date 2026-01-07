@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Explore Slang</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <header class="header">
+    <h1 class="brand-title">Explore Slang</h1>
+    <p class="subtitle">All slang words, decoded</p>
+  </header>
+
+  <!-- WORD GRID -->
+  <div class="explore-grid">
+    {% for word in all_words %}
+      <a href="/word/{{ word }}" class="explore-card">
+        <h3>
+          {{ word }}
+          {% if dictionary[word].get("added_at") 
+                and current_time - dictionary[word]["added_at"] < 604800 %}
+            <span class="new-badge">NEW</span>
+          {% endif %}
+        </h3>
+        <p>{{ dictionary[word].short }}</p>
+      </a>
+    {% endfor %}
+  </div>
+
+  <div style="text-align:center; margin-top:40px;">
+    <a class="back" href="/">← Back to Dictionary</a>
+  </div>
+
+</div>
+
+</body>
+</html>
