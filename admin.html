@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Review</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+  <header class="header">
+    <h1 class="brand-title">Admin Review</h1>
+    <p class="subtitle">
+      {{ pending|length }} submission{{ 's' if pending|length != 1 else '' }} awaiting review
+    </p>
+  </header>
+
+  {% if not pending %}
+    <div class="card empty-state">
+      🎉 No pending submissions. You’re all caught up!
+    </div>
+  {% endif %}
+
+  {% for item in pending %}
+    <div class="card admin-card">
+
+      <h3 class="admin-word">{{ item.word }}</h3>
+
+      <p><strong>Meaning:</strong> {{ item.meaning }}</p>
+
+      {% if item.example %}
+        <p><strong>Example:</strong> {{ item.example }}</p>
+      {% else %}
+        <p class="muted-text">No example provided</p>
+      {% endif %}
+
+      <div class="admin-actions">
+        <form method="POST">
+          <input type="hidden" name="index" value="{{ loop.index0 }}">
+          <input type="hidden" name="action" value="approve">
+          <button type="submit" class="approve-btn">Approve</button>
+        </form>
+
+        <form method="POST">
+          <input type="hidden" name="index" value="{{ loop.index0 }}">
+          <input type="hidden" name="action" value="reject">
+          <button type="submit" class="reject-btn">Reject</button>
+        </form>
+      </div>
+
+    </div>
+  {% endfor %}
+
+  <a class="back" href="/">← Back to Dictionary</a>
+
+</div>
+
+</body>
+</html>
